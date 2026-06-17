@@ -7,12 +7,11 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { BgIMG, photoURL } from "../utils/constants";
 
 const Login = () => {
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isSignInForm, setSignInForm] = useState(true);
@@ -50,7 +49,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://darshankumarjain.netlify.app/assets/profile.jpg",
+            photoURL: photoURL,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -62,12 +61,10 @@ const Login = () => {
                   photoURL: photoURL,
                 }),
               );
-              navigate("/browse");
             })
             .catch((error) => {
               seterrorMessage(errorMessage);
             });
-          console.log(user);
           // ...
         })
         .catch((error) => {
@@ -86,9 +83,6 @@ const Login = () => {
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
-          navigate("/browse");
-          // ...
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -102,10 +96,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/435e8bb8-7f1b-49cb-8da8-bff997124294/web/IN-en-20260511-TRIFECTA-perspective_ec39852e-0b48-4e8a-b415-dd8376cd83ce_small.jpg"
-          alt="background-logo"
-        />
+        <img src={BgIMG} alt="background-logo" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
