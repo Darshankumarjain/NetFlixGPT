@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { API_OPTIONS } from "../utils/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addTreserVideo } from "../utils/movieSlice";
 
 const useMovieTreser = (movieId) => {
   const dispatch = useDispatch();
+
+  const treserMovies = useSelector((Store) => Store.movies.treserVideo);
 
   const getMovieVideos = async () => {
     const data = await fetch(
@@ -21,7 +23,7 @@ const useMovieTreser = (movieId) => {
   };
 
   useEffect(() => {
-    getMovieVideos();
+    !treserMovies && getMovieVideos();
   }, []);
 };
 
