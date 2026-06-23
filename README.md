@@ -38,8 +38,14 @@
 -usePopular, useTrending, useUpcoming Movies Custom Hooks
 -GPT Search Page
 -GPT Search Bar
-
-
+-GPT Open API Key
+-GPT Search API Call
+-Fetch Movie Suggestion From TMDB 
+-Created gptSlice added data
+-Resused Movie List component to make suggestion container
+-Memoization
+-Added .env file and added to gitigonre
+-Made our Site Resopnsive
 
 # Features
 

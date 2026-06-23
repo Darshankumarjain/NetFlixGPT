@@ -57,20 +57,33 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
-      <img className="w-44" src={LOGO} alt="logo"></img>
+    <div className="absolute w-screen px-4 md:px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between items-center">
+      <img className=" mx-auto md:mx-0 w-44" src={LOGO} alt="logo"></img>
       {user && (
-        <div className="flex p-2">
-          <button
-            className="py-2 px-4 my-2 mx-4 bg-purple-900 text-white rounded-lg"
-            onClick={handleGptSearchClick}
-          >
-            {showGptSearch ? "Homepage" : "GPT Search"}
-          </button>
-          <img className="w-12 h-12" alt="user-ico" src={user?.photoURL}></img>
-          <button onClick={handleSignOut} className="font-bold text-white">
-            (Sign Out)
-          </button>
+        <div className="flex items-center p-2 absolute top-3 right-3 md:static">
+          <div className="flex flex-col md:flex-row md:items-center">
+            <div className="flex items-center">
+              <img
+                className="w-10 h-10 md:w-12 md:h-12 rounded-md"
+                alt="user-ico"
+                src={user?.photoURL}
+              />
+
+              <button
+                onClick={handleSignOut}
+                className="py-2 px-4 bg-red-700 rounded-lg font-bold text-white ml-2"
+              >
+                Sign Out
+              </button>
+            </div>
+
+            <button
+              className="py-2 px-4 mt-4 md:mt-0 md:ml-4 font-bold bg-purple-900 text-white rounded-lg"
+              onClick={handleGptSearchClick}
+            >
+              {showGptSearch ? "Homepage" : "GPT Search"}
+            </button>
+          </div>
         </div>
       )}
     </div>
