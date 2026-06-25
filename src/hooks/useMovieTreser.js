@@ -16,7 +16,6 @@ const useMovieTreser = (movieId) => {
       API_OPTIONS,
     );
     const json = await data.json();
-
     const filterData = json.results.filter((video) => video.type === "Teaser");
     const treser = filterData.length ? filterData[0] : json.results[0];
     dispatch(addTreserVideo(treser));
@@ -24,7 +23,7 @@ const useMovieTreser = (movieId) => {
 
   useEffect(() => {
     !treserMovies && getMovieVideos();
-  }, []);
+  }, [movieId]);
 };
 
 export default useMovieTreser;

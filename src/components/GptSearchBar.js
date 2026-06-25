@@ -24,7 +24,6 @@ const GptSearchBar = () => {
   };
 
   const handleGptSearchClick = async () => {
-    console.log(searchText.current.value);
     // Make an API call to GPT API and get Movie Results
 
     const gptQuery =
@@ -40,7 +39,6 @@ const GptSearchBar = () => {
     if (!gptResults.choices) {
       // TODO: write error handling
     }
-    console.log(gptResults.choices?.[0].message?.content);
     const gptMovies = gptResults.choices?.[0].message?.content.split(",");
 
     // For each movie i will search TMDB API
@@ -48,8 +46,6 @@ const GptSearchBar = () => {
     // i will get results of [promise, promise, promise, promise, promise] i will not happend immediately
 
     const tmdbResults = await Promise.all(promiseArray);
-
-    console.log(tmdbResults);
 
     dispatch(
       addGptMovieResult({ movieNames: gptMovies, movieResults: tmdbResults }),

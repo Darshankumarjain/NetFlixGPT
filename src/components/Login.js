@@ -25,6 +25,23 @@ const Login = () => {
     setSignInForm(!isSignInForm);
   };
 
+  const getErrorMessage = (code) => {
+    switch (code) {
+      case "auth/invalid-credential":
+        return "Invalid email or password. Please try again.";
+      case "auth/user-not-found":
+        return "No account found with this email.";
+      case "auth/wrong-password":
+        return "Wrong password. Please try again.";
+      case "auth/invalid-email":
+        return "Please enter a valid email address.";
+      case "auth/too-many-requests":
+        return "Too many attempts. Please try again later.";
+      default:
+        return "Something went wrong. Please try again.";
+    }
+  };
+
   const handleButtonClick = () => {
     // Validate the form data
     const message = checkValidData(
@@ -68,10 +85,7 @@ const Login = () => {
           // ...
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          seterrorMessage(errorCode + "-" + errorMessage);
-          // ..
+          seterrorMessage(getErrorMessage(error.code));
         });
     } else {
       // for Sign In Logic
@@ -85,9 +99,23 @@ const Login = () => {
           const user = userCredential.user;
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          seterrorMessage(errorCode + "-" + errorMessage);
+          const getErrorMessage = (code) => {
+            switch (code) {
+              case "auth/invalid-credential":
+                return "Invalid email or password. Please try again.";
+              case "auth/user-not-found":
+                return "No account found with this email.";
+              case "auth/wrong-password":
+                return "Wrong password. Please try again.";
+              case "auth/invalid-email":
+                return "Please enter a valid email address.";
+              case "auth/too-many-requests":
+                return "Too many attempts. Please try again later.";
+              default:
+                return "Something went wrong. Please try again.";
+            }
+          };
+          seterrorMessage(getErrorMessage(error.code));
         });
     }
   };
@@ -96,7 +124,11 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute inset-0 ">
-        <img className="w-full h-full object-cover" src={BgIMG} alt="background-logo" />
+        <img
+          className="w-full h-full object-cover"
+          src={BgIMG}
+          alt="background-logo"
+        />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
