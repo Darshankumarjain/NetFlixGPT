@@ -32,7 +32,7 @@ const GptSearchBar = () => {
       ". only give me names of 5 Movies only, commo seperated like the example result given ahead. Exapmle Result: Movie1, Movie2, Movie3, Movie4, Movie5";
 
     const gptResults = await openai.chat.completions.create({
-      model: "openai/gpt-oss-120b:free",
+      model: "openai/gpt-oss-20b:free",
       messages: [{ role: "user", content: gptQuery }],
     });
 
