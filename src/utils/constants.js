@@ -18,3 +18,4 @@ export const API_OPTIONS = {
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w780";
 
 export const OPENAI_KEY = process.env.REACT_APP_OPENAI_KEY;
+export const TMDB_PROXY = "https://netflixgpt-eta.vercel.app/api/tmdb";

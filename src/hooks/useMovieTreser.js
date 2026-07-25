@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { API_OPTIONS } from "../utils/constants";
+import { TMDB_PROXY } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { addTreserVideo } from "../utils/movieSlice";
 
@@ -16,10 +16,7 @@ const useMovieTreser = (movieId) => {
 
     const getMovieVideos = async () => {
       const data = await fetch(
-        "https://api.themoviedb.org/3/movie/" +
-          movieId +
-          "/videos?language=en-US",
-        API_OPTIONS,
+        `${TMDB_PROXY}?path=movie/${movieId}/videos&language=en-US`,
       );
       const json = await data.json();
       const filterData = json.results.filter(

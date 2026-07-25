@@ -1,17 +1,13 @@
 import { useEffect, useState } from "react";
-import { API_OPTIONS, IMG_CDN_URL } from "../utils/constants";
+import { TMDB_PROXY, IMG_CDN_URL } from "../utils/constants";
 
 const MovieDescription = ({ movieId, onClose }) => {
   const [details, setDetails] = useState(null);
 
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/movie/${movieId}?language=en-US`,
-      API_OPTIONS,
-    )
+    fetch(`${TMDB_PROXY}?path=movie/${movieId}&language=en-US`)
       .then((res) => res.json())
       .then((data) => {
-        console.log("movie details:", data); // ← add this
         setDetails(data);
       });
   }, [movieId]);

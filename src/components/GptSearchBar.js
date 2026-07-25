@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import openai from "../utils/openai";
-import { API_OPTIONS } from "../utils/constants";
+import { TMDB_PROXY } from "../utils/constants";
 import { addGptMovieResult } from "../utils/gptSlice";
 import { useDispatch } from "react-redux";
 
@@ -9,13 +9,12 @@ const GptSearchBar = () => {
 
   const searchText = useRef(null);
 
-  // search movie in TMDN
+  // search movie in TMDB
   const searchMovieTMDB = async (movie) => {
     const data = await fetch(
-      "https://api.themoviedb.org/3/search/movie?query=" +
-        movie +
-        "&include_adult=false&language=en-US&page=1",
-      API_OPTIONS,
+      `${TMDB_PROXY}?path=search/movie&query=${encodeURIComponent(
+        movie.trim(),
+      )}&include_adult=false&language=en-US&page=1`,
     );
 
     const json = await data.json();
